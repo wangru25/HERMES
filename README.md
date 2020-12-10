@@ -4,14 +4,14 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-10 12:17:53
+ * @LastEditTime: 2020-12-10 12:25:44
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMERS/README.md
  * @Description: 
 -->
 # HERMERS
 
-Highly Efficient Robust Multidimensional Evolutionary Spectra (HERMERS) is a library for evaluating both the harmonic and non-harmonic spectra of persistent Laplacian operators. In the present realse, we consider an implementation in alpha complexes.  
+Highly Efficient Robust Multidimensional Evolutionary Spectra (HERMERS) is a library for evaluating both the harmonic and non-harmonic spectra of persistent Laplacian operators. In the present realse, we consider an implementation in alpha complexes.  The theoretical literature can be found [here](link of arXiv).
 
 ## Requirements
 - cmake 3.1 or higher
@@ -41,17 +41,21 @@ Please make sure the MATLAB directory in the [CMakeLists.txt](https://github.com
 There are several examples projects in the [examples](https://github.com/wangru25/HERMERS/tree/main/examples).
 ### How to run
 ```bash
-cd build
-./HERMERS InputData Filtration Num
+./HERMERS InputData Filtration Num P
 ```
 - InputData: The point cloud data is allowed
 - Filtration: The radius filtration parameters 
 - Num: The number of eigenvalues that will be calculated
+- P: The persistent value
 ### For example:
 ```bash
-cd build
-./HERMERS Test_C60.xyz filtration 100
+cd examples
+./../build/HERMERS Test_C60.xyz filtration.txt 100 0.4
 ```
+- The spectra of the $p$-persistent $0$-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex](xxx)
+- The spectra of the $p$-persistent $1$-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge](xxx)
+- The spectra of the $p$-persistent $2$-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet](xxx)
+
 
 ## Documentation 
 
