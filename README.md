@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-10 15:24:25
+ * @LastEditTime: 2020-12-10 15:27:16
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMERS/README.md
  * @Description: 
@@ -52,9 +52,9 @@ There are several examples projects in the [examples](https://github.com/wangru2
 cd examples
 ./../build/HERMERS Test_C60.xyz filtration.txt 100 0.4
 ```
-- The spectra of the *p*-persistent *0*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex.txt](xxx)
-- The spectra of the *p*-persistent *1*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge.txt](xxx)
-- The spectra of the *p*-persistent *2*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet.txt](xxx)
+- The spectra of the *p*-persistent *0*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex.txt](https://github.com/wangru25/HERMERS/blob/main/examples/snapshots_vertex.txt)
+- The spectra of the *p*-persistent *1*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge.txt](https://github.com/wangru25/HERMERS/blob/main/examples/snapshots_edge.txt)
+- The spectra of the *p*-persistent *2*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet.txt](https://github.com/wangru25/HERMERS/blob/main/examples/snapshots_facet.txt)
 
 
 ## Documentation 
