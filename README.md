@@ -4,14 +4,14 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-10 12:25:44
+ * @LastEditTime: 2020-12-10 12:26:32
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMERS/README.md
  * @Description: 
 -->
 # HERMERS
 
-Highly Efficient Robust Multidimensional Evolutionary Spectra (HERMERS) is a library for evaluating both the harmonic and non-harmonic spectra of persistent Laplacian operators. In the present realse, we consider an implementation in alpha complexes.  The theoretical literature can be found [here](link of arXiv).
+Highly Efficient Robust Multidimensional Evolutionary Spectra (HERMERS) is a library for evaluating both the harmonic and non-harmonic spectra of persistent Laplacian operators. In the present realse, we consider an implementation in alpha complexes.  The theoretical literature can be found [here](xxx).
 
 ## Requirements
 - cmake 3.1 or higher
