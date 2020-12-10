@@ -4,14 +4,14 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-10 12:26:32
+ * @LastEditTime: 2020-12-10 15:20:09
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMERS/README.md
  * @Description: 
 -->
 # HERMERS
 
-Highly Efficient Robust Multidimensional Evolutionary Spectra (HERMERS) is a library for evaluating both the harmonic and non-harmonic spectra of persistent Laplacian operators. In the present realse, we consider an implementation in alpha complexes.  The theoretical literature can be found [here](xxx).
+Highly Efficient Robust Multidimensional Evolutionary Spectra (HERMERS) is a library for evaluating both the harmonic and non-harmonic spectra of persistent Laplacian operators. In the present release, we consider an implementation in alpha complexes.  The theoretical literature can be found [here](xxx).
 
 ## Requirements
 - cmake 3.1 or higher
@@ -52,14 +52,25 @@ There are several examples projects in the [examples](https://github.com/wangru2
 cd examples
 ./../build/HERMERS Test_C60.xyz filtration.txt 100 0.4
 ```
-- The spectra of the $p$-persistent $0$-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex](xxx)
-- The spectra of the $p$-persistent $1$-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge](xxx)
-- The spectra of the $p$-persistent $2$-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet](xxx)
+- The spectra of the *p*-persistent *0*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex.txt](xxx)
+- The spectra of the *p*-persistent *1*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge.txt](xxx)
+- The spectra of the *p*-persistent *2*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet.txt](xxx)
 
 
 ## Documentation 
 
-Documentation for HERMERS can be found [here](https://users.math.msu.edu/users/weig/HERMES).
+Documentation for HERMERS can be found [here](https://weilab.math.msu.edu/HERMERS/).
+
+## Citing
+You may use the following bibtex entry to cite HERMERS (will be updated with complete publication data):
+```
+@article{1908.02518,
+	author = {xxxx},
+	title = {HERMES: persistent spectral graph software},
+	year = {2020},
+	journal = {arXiv preprint arXiv:1804.06990}
+}
+```
 
 ## Contributors
 
