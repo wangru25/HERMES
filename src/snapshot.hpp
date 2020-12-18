@@ -69,6 +69,7 @@ protected:
 
     std::vector<double> m_filtration;
     int m_num_eigenvalues;
+    double m_p = 0; // p-persistence
 
     std::unique_ptr<matlab::engine::MATLABEngine> m_matlab_engine;
 
@@ -77,8 +78,9 @@ protected:
     std::vector<std::vector<double>> m_facet_snapshots;
 
 public:
-    // read a point cloud file to build alpha shape
+    // read a point cloud file to build the alpha shape
     void initializeParameters(int num_eigenvalues);
+    void initializeParameters(int num_eigenvalues, double p);
     void readFiltration(const std::string& filename);
     void buildAlphaShape(const std::string& filename);
     void preprocess();
@@ -127,7 +129,7 @@ protected:
     void buildLaplacian0(SparseMatrix& L0, const SparseMatrix& ED0T, const int& edge_size);
     void buildLaplacian1(SparseMatrix& L1, const SparseMatrix& ED0T, const SparseMatrix& ED1T, const int& edge_size, const int& facet_size);
     void buildLaplacian2(SparseMatrix& L2, const SparseMatrix& ED1T, const SparseMatrix& ED2T, const int& edge_size, const int& facet_size, const int& cell_size);
-	void buildPersistentLaplacian1(SparseMatrix& L1, const SparseMatrix& ED0T, const SparseMatrix& ED1T, const int& edge_size, const int& facet_size, const double filtration);
+	void buildPersistentLaplacian1(SparseMatrix& L1, const SparseMatrix& ED0T, const SparseMatrix& ED1T, const int& edge_size, const int& facet_size, const double filtration, double p);
 
     void takeVertexSnapshots(const SparseMatrix& L0, const int matrix_size); // beta_0
     void takeEdgeSnapshots(const SparseMatrix& L1, const int matrix_size); // beta_1
