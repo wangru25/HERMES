@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-17 22:43:29
+ * @LastEditTime: 2020-12-17 22:54:06
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -17,6 +17,7 @@ HERMES is a software package for simultaneous topological data analysis (persist
 - cmake 3.1 or higher
 - gcc 7.5.0
 - GNU Make 4.1
+- MATLAB
 - [CGAL](https://www.cgal.org/) version 4.14
 
 ## Install and Build
@@ -52,10 +53,9 @@ There are several examples projects in the [examples](https://github.com/wangru2
 cd examples
 ./../build/HERMES Test_C60.xyz filtration.txt 100 0.4
 ```
-- The spectra of the *0.4*-persistent *0*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_vertex.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *0*-th combinatorial Laplacian matrix at a specifc filtration value. 
-- The spectra of the *0.4*-persistent *1*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_edge.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *1*-th combinatorial Laplacian matrix at a specifc filtration value. 
-- The spectra of the *0.4*-persistent *2*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_facet.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *2*-th combinatorial Laplacian matrix at a specifc filtration value. 
-
+- The spectra of the 0th-order 0.4-persistent Laplacian will be saved in [examples/snapshots_vertex.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_vertex.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
+- The spectra of the 1th-order 0.4-persistent will be saved in [examples/snapshots_edge.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_edge.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
+- The spectra of the 2th-order 0.4-persistent will be saved in [examples/snapshots_facet.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_facet.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
 
 
 ## Documentation 
