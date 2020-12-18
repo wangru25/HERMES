@@ -4,14 +4,14 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-10 17:33:07
+ * @LastEditTime: 2020-12-17 22:43:29
  * @Email: wangru25@msu.edu
- * @FilePath: /HERMERS/README.md
+ * @FilePath: /HERMES/README.md
  * @Description: 
 -->
-# HERMERS
+# HERMES
 
-HERMERS is a software package for simultaneous topological data analysis (persistent Betti numbers) and geometric data analysis (persistent eigenvalues). It is realized through persistent spectral graph theory. In the present release, we consider an implementation in alpha complexes.
+HERMES is a software package for simultaneous topological data analysis (persistent Betti numbers) and geometric data analysis (persistent eigenvalues). It is realized through persistent spectral graph theory. In the present release, we consider an implementation in alpha complexes.
 
 ## Requirements
 - cmake 3.1 or higher
@@ -20,9 +20,9 @@ HERMERS is a software package for simultaneous topological data analysis (persis
 - [CGAL](https://www.cgal.org/) version 4.14
 
 ## Install and Build
-### You can intall HERMERS directly from the development repository:
+### You can intall HERMES directly from the development repository:
 ```bash
-git clone https://github.com/wangru25/HERMERS.git
+git clone https://github.com/wangru25/HERMES.git
 ```
 
 ### How to build the project:
@@ -34,14 +34,14 @@ make
 ```
 
 ### Notice:
-Please make sure the MATLAB directory in the [CMakeLists.txt](https://github.com/wangru25/HERMERS/blob/main/CMakeLists.txt) (Line 15 and Line 20) matches with yours. 
+Please make sure the MATLAB directory in the [CMakeLists.txt](https://github.com/wangru25/HERMES/blob/main/CMakeLists.txt) (Line 15 and Line 20) matches with yours. 
 
 
 ## Examples
-There are several examples projects in the [examples](https://github.com/wangru25/HERMERS/tree/main/examples).
+There are several examples projects in the [examples](https://github.com/wangru25/HERMES/tree/main/examples).
 ### How to run
 ```bash
-./HERMERS InputData Filtration Num P
+./HERMES InputData Filtration Num P
 ```
 - InputData: The point cloud data is allowed
 - Filtration: The radius filtration parameters 
@@ -50,20 +50,20 @@ There are several examples projects in the [examples](https://github.com/wangru2
 ### For example:
 ```bash
 cd examples
-./../build/HERMERS Test_C60.xyz filtration.txt 100 0.4
+./../build/HERMES Test_C60.xyz filtration.txt 100 0.4
 ```
-- The spectra of the *0.4*-persistent *0*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex.txt](https://github.com/wangru25/HERMERS/blob/main/examples/snapshots_vertex.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *0*-th combinatorial Laplacian matrix at a specifc filtration value. 
-- The spectra of the *0.4*-persistent *1*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge.txt](https://github.com/wangru25/HERMERS/blob/main/examples/snapshots_edge.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *1*-th combinatorial Laplacian matrix at a specifc filtration value. 
-- The spectra of the *0.4*-persistent *2*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet.txt](https://github.com/wangru25/HERMERS/blob/main/examples/snapshots_facet.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *2*-th combinatorial Laplacian matrix at a specifc filtration value. 
+- The spectra of the *0.4*-persistent *0*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_vertex.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_vertex.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *0*-th combinatorial Laplacian matrix at a specifc filtration value. 
+- The spectra of the *0.4*-persistent *1*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_edge.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_edge.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *1*-th combinatorial Laplacian matrix at a specifc filtration value. 
+- The spectra of the *0.4*-persistent *2*-th combinatorial Laplacian matrix will be saved in [examples/snapshots_facet.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_facet.txt). Each line preserves the harmonic and non-harmonic eigenvalues of *0.4*-persistent *2*-th combinatorial Laplacian matrix at a specifc filtration value. 
 
 
 
 ## Documentation 
 
-Documentation for HERMERS can be found [here](https://weilab.math.msu.edu/HERMERS/).
+Documentation for HERMES can be found [here](https://weilab.math.msu.edu/HERMES/).
 
 ## Citing
-You may use the following bibtex entry to cite HERMERS (will be updated with complete publication data):
+You may use the following bibtex entry to cite HERMES (will be updated with complete publication data):
 ```
 @article{1908.02518,
 	author = {xxxx},
@@ -80,5 +80,5 @@ You may use the following bibtex entry to cite HERMERS (will be updated with com
 
 ## Contributors
 
-HERMERS was created by [Rundong Zhao](https://github.com/rdzhao) and is maintained by [Yiying Tong](xxx), [Emily Ribando-Gros](https://github.com/eribandogros), [Jiahui Chen](https://github.com/Jiahuic), [Rui Wang](https://github.com/wangru25), and [Weilab at MSU Math](https://github.com/msuweilab).
+HERMES was created by [Rundong Zhao](https://github.com/rdzhao) and is maintained by [Yiying Tong](xxx), [Emily Ribando-Gros](https://github.com/eribandogros), [Jiahui Chen](https://github.com/Jiahuic), [Rui Wang](https://github.com/wangru25), and [Weilab at MSU Math](https://github.com/msuweilab).
 
