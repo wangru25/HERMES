@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-17 22:54:06
+ * @LastEditTime: 2020-12-21 22:42:08
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -65,17 +65,19 @@ Documentation for HERMES can be found [here](https://weilab.math.msu.edu/HERMES/
 ## Citing
 You may use the following bibtex entry to cite HERMES (will be updated with complete publication data):
 ```
-@article{1908.02518,
-	author = {xxxx},
-	title = {HERMES: persistent spectral graph software},
-	year = {2020},
-	journal = {arXiv preprint arXiv:1804.06990}
+@misc{wang2020hermes,
+      title={HERMES: Persistent spectral graph software}, 
+      author={Rui Wang and Rundong Zhao and Emily Ribando-Gros and Jiahui Chen and Yiying Tong and Guo-Wei Wei},
+      year={2020},
+      eprint={2012.11065},
+      archivePrefix={arXiv},
+      primaryClass={math.AT}
 }
 ```
 
 ## References
-- HERMES: persistent spectral graph software.
-- R. Wang, D. D. Nguyen, and G.-W. Wei. Persistent spectral graph. International Journal for Numerical Methods in Biomedical Engineering, page e3376, 2020.
+- R. Wang, R. Zhao, E. Ribando-Gros, J. Chen, Y. Tong, and G.-W. Wei. [Hermes: Persistent spectral graphsoftware](https://arxiv.org/pdf/2012.11065.pdf), 2020.
+- R. Wang, D. D. Nguyen, and G.-W. Wei. [Persistent spectral graph](https://users.math.msu.edu/users/weig/paper/p243.pdf). International Journal for Numerical Methods in Biomedical Engineering, page e3376, 2020.
 
 
 ## Contributors
