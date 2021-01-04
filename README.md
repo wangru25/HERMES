@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2020-12-21 22:44:52
+ * @LastEditTime: 2021-01-04 10:14:21
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -65,13 +65,11 @@ Documentation for HERMES can be found [here](https://weilab.math.msu.edu/HERMES/
 ## Citing
 You may use the following bibtex entry to cite HERMES (will be updated with complete publication data):
 ```
-@misc{wang2020hermes,
-      title={HERMES: Persistent spectral graph software}, 
-      author={Rui Wang and Rundong Zhao and Emily Ribando-Gros and Jiahui Chen and Yiying Tong and Guo-Wei Wei},
-      year={2020},
-      eprint={2012.11065},
-      archivePrefix={arXiv},
-      primaryClass={math.AT}
+@article{wang2020hermes,
+  title={HERMES: Persistent spectral graph software},
+  author={Wang, Rui and Zhao, Rundong and Ribando-Gros, Emily and Chen, Jiahui and Tong, Yiying and Wei, Guo-Wei},
+  journal={arXiv preprint arXiv:2012.11065},
+  year={2020}
 }
 ```
 
