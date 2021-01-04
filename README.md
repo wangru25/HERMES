@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2021-01-04 10:14:21
+ * @LastEditTime: 2021-01-04 10:15:26
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -63,7 +63,7 @@ cd examples
 Documentation for HERMES can be found [here](https://weilab.math.msu.edu/HERMES/).
 
 ## Citing
-You may use the following bibtex entry to cite HERMES (will be updated with complete publication data):
+You may use the following bibtex entry to cite HERMES:
 ```
 @article{wang2020hermes,
   title={HERMES: Persistent spectral graph software},
