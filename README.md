@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2021-01-12 16:58:10
+ * @LastEditTime: 2021-01-12 17:02:18
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -42,7 +42,7 @@ Please make sure the MATLAB directory in the [CMakeLists.txt](https://github.com
 There are several examples projects in the [examples](https://github.com/wangru25/HERMES/tree/main/examples).
 ### How to run
 ```bash
-./HERMES InputData Filtration Num P
+./Snapshot InputData Filtration Num P
 ```
 - InputData: The point cloud data is allowed
 - Filtration: The radius filtration parameters 
