@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2021-01-04 10:15:26
+ * @LastEditTime: 2021-01-12 16:54:35
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -51,7 +51,7 @@ There are several examples projects in the [examples](https://github.com/wangru2
 ### For example:
 ```bash
 cd examples
-./../build/HERMES Test_C60.xyz filtration.txt 100 0.4
+./../build/HERMES/Snapshot Test_C60.xyz filtration.txt 100 0.4
 ```
 - The spectra of the 0th-order 0.4-persistent Laplacian will be saved in [examples/snapshots_vertex.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_vertex.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
 - The spectra of the 1th-order 0.4-persistent will be saved in [examples/snapshots_edge.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_edge.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
