@@ -9,6 +9,12 @@ void Snapshot::initializeParameters(int num_eigenvalues, double p){
     m_p = p;
 }
 
+void Snapshot::initializeParameters(int num_eigenvalues, double p, char c){
+    m_num_eigenvalues = num_eigenvalues;
+    m_p = p;
+    m_complex = c;
+}
+
 void Snapshot::readFiltration(const std::string& filename){
     std::ifstream file(filename);
     double val = 0;
@@ -80,10 +86,12 @@ void Snapshot::takeSnapshots(){
 
         std::cout<<CONSOLE_GREEN<<"Build Laplacians ... "<<CONSOLE_WHITE<<std::endl;
         SparseMatrix L0, L1, L2;
-        buildLaplacian0(L0, ED0T, next_edge_size);
-        //buildLaplacian1(L1, ED0T, ED1T, next_edge_size, next_facet_size);
+        // buildLaplacian0(L0, ED0T, next_edge_size);
+        // buildLaplacian1(L1, ED0T, ED1T, next_edge_size, next_facet_size);
+        // buildLaplacian2(L2, ED1T, ED2T, next_edge_size, next_facet_size, next_cell_size);
+        buildPersistentLaplacian0(L0, ED0T, ED1T, next_edge_size, m_filtration[i], m_p);
         buildPersistentLaplacian1(L1, ED0T, ED1T, next_edge_size, next_facet_size, m_filtration[i], m_p);
-        buildLaplacian2(L2, ED1T, ED2T, next_edge_size, next_facet_size, next_cell_size);
+        buildPersistentLaplacian2(L2, ED1T, ED2T, next_edge_size, next_facet_size, next_cell_size, m_filtration[i], m_p);
 
         std::cout<<CONSOLE_GREEN<<"Take snapshots ... "<<CONSOLE_WHITE<<std::endl;
         takeVertexSnapshots(L0, m_alpha.numVertices());
@@ -204,88 +212,91 @@ void Snapshot::indexSortedElements(){
 }
 
 void Snapshot::computeEdgeRadius(){
-    for(int i=0; i<m_alpha.numEdges(); ++i){
-        auto ei = m_alpha.idxToEdge(i);
-        Point3 p1 = ei->first->vertex(ei->second)->point();
-        Point3 p2 = ei->first->vertex(ei->third)->point();
-        Point3 c = CGAL::circumcenter(p1, p2);
-        m_edge_radius[ei] = (p1-c).squared_length();
-        //std::cout<<m_edge_radius[ei]<<std::endl;
+    if (m_complex == 'r'){
+        for(int i=0; i<m_alpha.numEdges(); ++i){
+            auto ei = m_alpha.idxToEdge(i);
+            m_edge_radius[ei] = m_alpha.edgeLength(ei);
+        }
     }
-    
-    /*
-    for(int i=0; i<m_alpha.numEdges(); ++i){
-        auto ei = m_alpha.idxToEdge(i);
-        m_edge_radius[ei] = m_alpha.edgeLength(ei);
+    else{
+        for(int i=0; i<m_alpha.numEdges(); ++i){
+            auto ei = m_alpha.idxToEdge(i);
+            Point3 p1 = ei->first->vertex(ei->second)->point();
+            Point3 p2 = ei->first->vertex(ei->third)->point();
+            Point3 c = CGAL::circumcenter(p1, p2);
+            m_edge_radius[ei] = (p1-c).squared_length();
+            //std::cout<<m_edge_radius[ei]<<std::endl;
+        }
     }
-    */
 }
 
 void Snapshot::computeFacetRadius(){
-    for(int i=0; i<m_alpha.numFacets(); ++i){
-        auto fi = m_alpha.idxToFacet(i);
-        std::vector<Point3> vp;
-        vp.reserve(3);
-        for(int j=0; j<4; ++j){
-            if(j==fi->second) continue;
-            vp.push_back(fi->first->vertex(j)->point());
-        }
-        Point3 c = CGAL::circumcenter(vp[0], vp[1], vp[2]);
-        m_facet_radius[fi] = (vp[0]-c).squared_length();
-    }
-
-    /*
-    for(int i=0; i<m_alpha.numFacets(); ++i){
-        auto fi = m_alpha.idxToFacet(i);
-        double radius = std::numeric_limits<double>::min();
-        
-        std::vector<int> idx;
-        idx.reserve(3);
-        for(int j=0; j<4; ++j){
-            if(j==fi->second) continue;
-            idx.push_back(j);
-        }
-        
-        for(int j=0; j<idx.size(); ++j){
-            int vid1 = idx[j];
-            int vid2 = idx[(j+1)%idx.size()];
-            if(vid1>vid2) std::swap(vid1, vid2);
+    if (m_complex == 'r'){
+        for(int i=0; i<m_alpha.numFacets(); ++i){
+            auto fi = m_alpha.idxToFacet(i);
+            double radius = std::numeric_limits<double>::min();
             
-            auto ei = m_alpha.cellEdgeMap(Edge(fi->first, vid1, vid2));
+            std::vector<int> idx;
+            idx.reserve(3);
+            for(int j=0; j<4; ++j){
+                if(j==fi->second) continue;
+                idx.push_back(j);
+            }
             
-            radius = std::max(radius, m_alpha.edgeLength(ei));
+            for(int j=0; j<idx.size(); ++j){
+                int vid1 = idx[j];
+                int vid2 = idx[(j+1)%idx.size()];
+                if(vid1>vid2) std::swap(vid1, vid2);
+                
+                auto ei = m_alpha.cellEdgeMap(Edge(fi->first, vid1, vid2));
+                
+                radius = std::max(radius, m_alpha.edgeLength(ei));
+            }
+            m_facet_radius[fi] = radius;
         }
-        m_facet_radius[fi] = radius;
     }
-    */
+    else {
+        for(int i=0; i<m_alpha.numFacets(); ++i){
+            auto fi = m_alpha.idxToFacet(i);
+            std::vector<Point3> vp;
+            vp.reserve(3);
+            for(int j=0; j<4; ++j){
+                if(j==fi->second) continue;
+                vp.push_back(fi->first->vertex(j)->point());
+            }
+            Point3 c = CGAL::circumcenter(vp[0], vp[1], vp[2]);
+            m_facet_radius[fi] = (vp[0]-c).squared_length();
+        }
+    }
 }
 
 void Snapshot::computeCellRadius(){
-    for(int i=0; i<m_alpha.numCells(); ++i){
-        auto ci = m_alpha.idxToCell(i);
-        std::vector<Point3> vp;
-        vp.reserve(4);
-        for(int j=0; j<4; ++j){
-            vp.push_back(ci->vertex(j)->point());
-        }
-        Point3 c = CGAL::circumcenter(vp[0], vp[1], vp[2], vp[3]);
-        m_cell_radius[ci] = (vp[0]-c).squared_length();
-    }
+    if (m_complex == 'r'){
+        for(int i=0; i<m_alpha.numCells(); ++i){
+            auto ci = m_alpha.idxToCell(i);
+            double radius = std::numeric_limits<double>::min();
 
-    /*
-    for(int i=0; i<m_alpha.numCells(); ++i){
-        auto ci = m_alpha.idxToCell(i);
-        double radius = std::numeric_limits<double>::min();
-
-        for(int j=0; j<4; ++j){
-            for(int k=j+1; k<4; ++k){
-                auto ei = m_alpha.cellEdgeMap(Edge(ci, j, k));
-                radius = std::max(radius, m_alpha.edgeLength(ei));
+            for(int j=0; j<4; ++j){
+                for(int k=j+1; k<4; ++k){
+                    auto ei = m_alpha.cellEdgeMap(Edge(ci, j, k));
+                    radius = std::max(radius, m_alpha.edgeLength(ei));
+                }
             }
+            m_cell_radius[ci] = radius;
         }
-        m_cell_radius[ci] = radius;
     }
-    */
+    else {
+        for(int i=0; i<m_alpha.numCells(); ++i){
+            auto ci = m_alpha.idxToCell(i);
+            std::vector<Point3> vp;
+            vp.reserve(4);
+            for(int j=0; j<4; ++j){
+                vp.push_back(ci->vertex(j)->point());
+            }
+            Point3 c = CGAL::circumcenter(vp[0], vp[1], vp[2], vp[3]);
+            m_cell_radius[ci] = (vp[0]-c).squared_length();
+        }
+    }
 }
 
 void Snapshot::buildEdgePriorityQueue(){
@@ -527,6 +538,33 @@ void Snapshot::buildLaplacian1(SparseMatrix& L1, const SparseMatrix& ED0T, const
     //L1 = ED0T.transpose()*ED0T + ED1T*ED1T.transpose();
 }
 
+void Snapshot::buildLaplacian2(SparseMatrix& L2, const SparseMatrix& ED1T, const SparseMatrix& ED2T, const int& edge_size, const int& facet_size, const int& cell_size) {
+	SparseMatrix ED1T_block = ED1T.block(0, 0, edge_size, facet_size);
+	SparseMatrix ED2T_block = ED2T.block(0, 0, facet_size, cell_size);
+	L2 = ED1T_block.transpose()*ED1T_block + ED2T_block * ED2T_block.transpose();
+	//L2 = ED1T.transpose()*ED1T + ED2T*ED2T.transpose();
+}
+
+void Snapshot::buildPersistentLaplacian0(SparseMatrix& L0, const SparseMatrix& ED0T, const SparseMatrix& ED1T, const int& edge_size, const double filtration, double p) {
+		p = pow(sqrt(filtration) + p, 2.) - filtration;
+
+		const int vertex_size = m_alpha.numVertices();
+		int p_vertex = 0; //always 0 for alpha-complex;
+
+		int next_size = edge_size;
+
+		while (next_size < m_sorted_edges.size() && m_alpha.edgeAlpha(m_sorted_edges[next_size]) < filtration + p) {
+			++next_size;
+		}
+		int p_edge = next_size - edge_size;
+
+		SparseMatrix ED0T_block = ED0T.block(0, 0, vertex_size, edge_size + p_edge);
+
+		//For alpha-complex or Rips-complex, all 0-simplices are present in the first subcomplex of the filtration
+		L0 = ED0T_block * ED0T_block.transpose();
+}
+
+
 void Snapshot::buildPersistentLaplacian1(SparseMatrix& L1, const SparseMatrix& ED0T, const SparseMatrix& ED1T, const int& edge_size, const int& facet_size, const double filtration, double p) {
     
     p = pow(sqrt(filtration) + p, 2.) - filtration;
@@ -547,13 +585,6 @@ void Snapshot::buildPersistentLaplacian1(SparseMatrix& L1, const SparseMatrix& E
     }
     int p_face = next_size - facet_size;
     
-//    std::cout << "alpha = " << sqrt(filtration) << std::endl;
-//    std::cout << "p = " << p << std::endl;
-//    std::cout << "p_edge = " << p_edge << std::endl;
-//    std::cout << "edge_size = " << edge_size << std::endl;
-//    std::cout << "edge_size + p_edge = " << edge_size + p_edge << std::endl;
-//    std::cout << "facet_size + p_face = " << facet_size + p_face << std::endl;
-    
     SparseMatrix ED0T_block = ED0T.block(0, 0, vertex_size, edge_size);
     SparseMatrix ED1T_block = ED1T.block(0, 0, edge_size, facet_size + p_face);
     // size (edge_size, facet_size + p_face) starting at (0, 0)
@@ -561,15 +592,13 @@ void Snapshot::buildPersistentLaplacian1(SparseMatrix& L1, const SparseMatrix& E
     if (p_edge != 0 && p_face != 0 && p != 0) {
         SparseMatrix L1diff(p_edge, p_edge);
         SparseMatrix Diff = ED1T.block(edge_size, 0, p_edge, facet_size + p_face);
-        //SparseMatrix Diff = ED1T.block(edge_size, 0, edge_size + p_edge, facet_size + p_face);
         
         SparseMatrix eye(facet_size + p_face, facet_size + p_face);
         eye.setIdentity();
         
         SparseMatrix gauge = ED0T.block(0, edge_size, vertex_size, p_edge);
-        //SparseMatrix gauge = ED0T.block(0, edge_size, vertex_size, edge_size + p_edge);
-        // size (vertex_size, edge_size + p_edge) starting at (0, edge_size)
-        SparseMatrix gaugeTranspose = gauge.transpose();
+
+		SparseMatrix gaugeTranspose = gauge.transpose();
         
         // get rid of all cols corresponding to a vertex in gaugeTranspose
         // setting dependence on the vertices touched by alpha complex to 0
@@ -601,25 +630,83 @@ void Snapshot::buildPersistentLaplacian1(SparseMatrix& L1, const SparseMatrix& E
         //Eigen::SparseMatrix<double> L1_temp1 = ED1T_block*ED1T_block.transpose();
         L1  = ED0T_block.transpose()*ED0T_block + L1_temp1;
         //L1 = ED0T_block.transpose()*ED0T_block + ED1T_block*(eye-Diff.transpose()*(L1diff_inv*L1diff*L1diff_inv)*Diff)* ED1T_block.transpose();
-        
-//        std::cout << "Diff " << Diff.rows() << " " << Diff.cols() << std::endl;
-//        std::cout << "eye " << facet_size + p_face << std::endl;
-//        std::cout << "gauge " << gauge.rows() << " " << gauge.cols() << std::endl;
-//        std::cout << "eye1 " << edge_size + p_edge << std::endl;
-//        std::cout << "L1diff " << L1diff.rows() << " " << L1diff.cols() << std::endl;
-//        std::cout << "I " << edge_size + p_edge << std::endl;
-//        std::cout << "L1 " << L1.rows() << " " << L1.cols() << std::endl;
 
     } else {
         L1 = ED0T_block.transpose()*ED0T_block + ED1T_block*ED1T_block.transpose();
     }
 }
 
-void Snapshot::buildLaplacian2(SparseMatrix& L2, const SparseMatrix& ED1T, const SparseMatrix& ED2T, const int& edge_size, const int& facet_size, const int& cell_size){
-    SparseMatrix ED1T_block = ED1T.block(0,0,edge_size,facet_size);
-    SparseMatrix ED2T_block = ED2T.block(0,0,facet_size,cell_size);
-    L2 = ED1T_block.transpose()*ED1T_block + ED2T_block*ED2T_block.transpose();
-    //L2 = ED1T.transpose()*ED1T + ED2T*ED2T.transpose();
+void Snapshot::buildPersistentLaplacian2(SparseMatrix& L2, const SparseMatrix& ED1T, const SparseMatrix& ED2T, const int& edge_size, const int& facet_size, const int & cell_size, const double filtration, double p) {
+
+	p = pow(sqrt(filtration) + p, 2.) - filtration;
+
+	int next_size = edge_size;
+
+	while (next_size < m_sorted_edges.size() && m_alpha.edgeAlpha(m_sorted_edges[next_size]) < filtration + p) {
+		++next_size;
+	}
+	int p_edge = next_size - edge_size;
+
+	next_size = facet_size;
+	while (next_size < m_sorted_facets.size() && m_alpha.facetAlpha(m_sorted_facets[next_size]) < filtration + p) {
+		++next_size;
+	}
+	int p_face = next_size - facet_size;
+
+	next_size = cell_size;
+	while (next_size < m_sorted_cells.size() && m_alpha.cellAlpha(m_sorted_cells[next_size]) < filtration + p) {
+		++next_size;
+	}
+	int p_cell = next_size - cell_size;
+
+	SparseMatrix ED1T_block = ED1T.block(0, 0, edge_size, facet_size);
+	SparseMatrix ED2T_block = ED2T.block(0, 0, facet_size, cell_size + p_cell);
+
+	if (p_face != 0 && p_cell != 0 && p != 0) {
+		SparseMatrix L2diff(p_face, p_face);
+		SparseMatrix Diff = ED2T.block(facet_size, 0, p_face, cell_size + p_cell);
+
+		SparseMatrix eye(cell_size + p_cell, cell_size + p_cell);
+		eye.setIdentity();
+
+		SparseMatrix gauge = ED1T.block(0, facet_size, edge_size, p_face);
+
+		SparseMatrix gaugeTranspose = gauge.transpose();
+
+		// get rid of all cols corresponding to a vertex in gaugeTranspose
+		// setting dependence on the vertices touched by alpha complex to 0
+		for (int k = 0; k < facet_size; ++k) {
+			for (SparseMatrix::InnerIterator it(ED1T, k); it; ++it) {
+				if (fabs(it.value()) > 0.5 && it.index() < edge_size) {
+					for (SparseMatrix::InnerIterator it2(gaugeTranspose, it.index()); it2; ++it2) {
+						it2.valueRef() = 0.;
+					}
+				}
+			}
+		}
+		////L2diff = gaugeTranspose * gauge + Diff * Diff.transpose(); //Need to have deficiency fixing if the different complex has more than 1 boundary pieces properly
+		SparseMatrix eye1(p_face, p_face);
+		eye1.setIdentity();
+		
+		L2diff = gaugeTranspose * gauge + Diff * Diff.transpose() + 1e-12*eye1; //This is just adding a bit of damping
+		Eigen::ConjugateGradient<SparseMatrix> solver;
+		solver.compute(L2diff);
+		SparseMatrix I(p_face, p_face);
+		I.setIdentity();
+		SparseMatrix L2diff_inv = solver.solve(I);
+		////L1 = ED0T_block.transpose()*ED0T_block + ED1T_block*(eye-Diff.transpose()*L1diff_inv*Diff)* ED1T_block.transpose();
+		SparseMatrix L2_t1 = L2diff * L2diff_inv;
+		SparseMatrix L2_t = L2diff_inv * L2_t1;
+		SparseMatrix L2_temp = eye - Diff.transpose()*L2_t*Diff;
+		SparseMatrix L2_temp1 = ED2T_block * L2_temp*ED2T_block.transpose();
+
+		L2 = ED1T_block.transpose()*ED1T_block + L2_temp1;
+		//L2 = ED1T_block.transpose()*ED1T_block + ED2T_block*(eye-Diff.transpose()*(L2diff_inv.transpose()*L2diff*L2diff_inv)*Diff)* ED2T_block.transpose();
+
+	}
+	else {
+		L2 = ED1T_block.transpose()*ED1T_block + ED2T_block * ED2T_block.transpose();
+	}
 }
 
 void Snapshot::takeVertexSnapshots(const SparseMatrix& L0, const int matrix_size){
@@ -715,39 +802,36 @@ void Snapshot::startMatlab(){
     m_matlab_engine = matlab::engine::startMATLAB();
 }
 
-// Error: Can't convert the Array to this TypedArray
 void Snapshot::matlabEIGS(std::vector<double>& eval, std::vector<ColumnVector>& evec, int matrix_size,
     std::vector<double>& row, std::vector<double>& col, std::vector<double>& val, int es){
-        std::vector<double> vms = {static_cast<double>(matrix_size)};
-        std::vector<double> ves = {static_cast<double>(es)};
-        using namespace matlab;
+    std::vector<double> vms = {static_cast<double>(matrix_size)};
+    std::vector<double> ves = {static_cast<double>(es)};
+    using namespace matlab;
 
-        data::ArrayFactory factory;
-        
-        data::TypedArray<double> mms = factory.createArray<std::vector<double>::iterator>({ 1, 1 }, vms.begin(), vms.end());
-        data::TypedArray<double> mrow = factory.createArray<std::vector<double>::iterator>({ row.size(), 1 }, row.begin(), row.end());
-        data::TypedArray<double> mcol = factory.createArray<std::vector<double>::iterator>({ col.size(), 1 }, col.begin(), col.end());
-        data::TypedArray<double> mval = factory.createArray<std::vector<double>::iterator>({ val.size(), 1 }, val.begin(), val.end());
-        data::TypedArray<double> mes = factory.createArray<std::vector<double>::iterator>({ 1, 1 }, ves.begin(), ves.end());
+    data::ArrayFactory factory;
     
-        m_matlab_engine->setVariable(u"size", std::move(mms));
-        m_matlab_engine->setVariable(u"row", std::move(mrow));
-        m_matlab_engine->setVariable(u"col", std::move(mcol));
-        m_matlab_engine->setVariable(u"val", std::move(mval));
-        m_matlab_engine->setVariable(u"es", std::move(mes));
-        m_matlab_engine->eval(u"A=sparse(row, col, val, size, size);");
-        m_matlab_engine->eval(u"A=A+speye(size)*1e-12;");
-        m_matlab_engine->eval(u"if size > es \n num = es; \n else \n num = size; \n end \n");
-        m_matlab_engine->eval(u"[V,D]=eigs((A+A')/2, num, 'smallestabs');");
-        // exit(0);
-        // Error: Can't convert the Array to this TypedArray
-        data::TypedArray<double> dd = m_matlab_engine->getVariable(u"D");
-        data::TypedArray<double> vv = m_matlab_engine->getVariable(u"V");
+    data::TypedArray<double> mms = factory.createArray<std::vector<double>::iterator>({ 1, 1 }, vms.begin(), vms.end());
+    data::TypedArray<double> mrow = factory.createArray<std::vector<double>::iterator>({ row.size(), 1 }, row.begin(), row.end());
+    data::TypedArray<double> mcol = factory.createArray<std::vector<double>::iterator>({ col.size(), 1 }, col.begin(), col.end());
+    data::TypedArray<double> mval = factory.createArray<std::vector<double>::iterator>({ val.size(), 1 }, val.begin(), val.end());
+    data::TypedArray<double> mes = factory.createArray<std::vector<double>::iterator>({ 1, 1 }, ves.begin(), ves.end());
+    
+    m_matlab_engine->setVariable(u"size", std::move(mms));
+    m_matlab_engine->setVariable(u"row", std::move(mrow));
+    m_matlab_engine->setVariable(u"col", std::move(mcol));
+    m_matlab_engine->setVariable(u"val", std::move(mval));
+    m_matlab_engine->setVariable(u"es", std::move(mes));
+    m_matlab_engine->eval(u"A=sparse(row, col, val, size, size);");
+    m_matlab_engine->eval(u"A=A+speye(size)*1e-12;");
+    m_matlab_engine->eval(u"if size > es \n num = es; \n else \n num = size; \n end \n");
+    m_matlab_engine->eval(u"[V,D]=eigs((A+A')/2, num, 'smallestabs');");
+    data::TypedArray<double> dd = m_matlab_engine->getVariable(u"D");
+    data::TypedArray<double> vv = m_matlab_engine->getVariable(u"V");
 
-        eval.reserve(dd.getDimensions()[0]);
-        for(int i=0; i<dd.getDimensions()[0]; ++i){
-            eval.push_back(dd[i][i]);
-        }
+    eval.reserve(dd.getDimensions()[0]);
+    for(int i=0; i<dd.getDimensions()[0]; ++i){
+        eval.push_back(dd[i][i]);
+    }
 }
 
 void Snapshot::writeVertices(){
