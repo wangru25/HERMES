@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2021-02-13 15:15:04
+ * @LastEditTime: 2021-02-13 15:31:32
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -45,9 +45,9 @@ There are several examples projects in the [examples](https://github.com/wangru2
 ./Snapshot InputData Filtration Num P Complex
 ```
 - InputData: The point cloud data is allowed
-- Filtration: The radius filtration parameters. Note: For alpha complex, the input filtration is radius^2.; for Vietoris–Rips complex, the input filtration is 2*radius
+- Filtration: The radius filtration parameters. Note: For alpha complex, the input filtration Filtration_alpha is actually radius^2. For Vietoris–Rips complex, the input filtration Filtration_rips is 2*radius, which match with the other open-source packages such as Ripser, Gudhi, and Diode.
 - Num: The number of eigenvalues that will be calculated
-- P: The persistent value
+- P: The persistent value, which describes the increasement of radius. 
 - Complex: Two choices, 1) Alpha complex 2) Vietoris–Rips complex
 ### For example:
 #### Alpha complex
