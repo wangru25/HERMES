@@ -115,7 +115,6 @@ void AlphaShape::readPointCloud(std::string filename){
     std::random_device rd;
     std::mt19937 generator(rd());
     std::uniform_real_distribution<double> distribution(-1.0, 1.0);
-
     std::string line;
     while(std::getline(file, line)){
         std::stringstream ss(line);
@@ -124,11 +123,11 @@ void AlphaShape::readPointCloud(std::string filename){
         double x_pert = 0;
         double y_pert = 0;
         double z_pert = 0;
-        //double x_pert = distribution(generator)*1e-15;
-        //double y_pert = distribution(generator)*1e-15;
-        //double z_pert = distribution(generator)*1e-15;
-        //std::cout<<x+x_pert<<" "<<y+y_pert<<" "<<z+z_pert<<std::endl;
+//        double x_pert = distribution(generator)*1e-15;
+//        double y_pert = distribution(generator)*1e-15;
+//        double z_pert = distribution(generator)*1e-15;
         m_point_cloud.push_back(Point3(x+x_pert,y+y_pert,z+z_pert));
+        
     }
     file.close();
 }

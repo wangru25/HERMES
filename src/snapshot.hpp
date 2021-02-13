@@ -1,4 +1,5 @@
 #include "alpha_shape.hpp"
+#include "rips_shape.hpp"
 
 class EdgeRadiusCompare{
 public:
@@ -46,6 +47,7 @@ typedef std::priority_queue<CellIterator, std::vector<CellIterator>, CellRadiusC
 class Snapshot{
 protected:
     AlphaShape m_alpha;
+    RipsShape m_rips;
     
     std::unordered_map<EdgeIterator, double, EdgeIteratorHash> m_edge_radius;
     std::unordered_map<FacetIterator, double, FacetIteratorHash> m_facet_radius;
@@ -71,7 +73,8 @@ protected:
     int m_num_eigenvalues;
     double m_p = 0.; // p-persistence
     char m_complex = 'a'; // 'a' for alpha complex and 'r' for rips complex
-    // TODO: Czech complex
+    
+    int numVertices, numEdges, numFacets, numCells;
 
     std::unique_ptr<matlab::engine::MATLABEngine> m_matlab_engine;
 
@@ -80,18 +83,19 @@ protected:
     std::vector<std::vector<double>> m_facet_snapshots;
 
 public:
-    // read a point cloud file to build the alpha shape
     void initializeParameters(int num_eigenvalues);
     void initializeParameters(int num_eigenvalues, double p);
     void initializeParameters(int num_eigenvalues, double p, char complex);
     void readFiltration(const std::string& filename);
     void buildAlphaShape(const std::string& filename);
+    void buildRipsShape(const std::string& filename);
     void preprocess();
     void takeSnapshots();
     void write();
     void debug();
 
 protected:
+    void setNumElements();
     void computeMinMaxEdgeLength();
     void computeRadius();
     void buildPriorityQueue();
