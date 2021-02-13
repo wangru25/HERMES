@@ -4,7 +4,7 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2021-01-12 17:02:18
+ * @LastEditTime: 2021-02-13 15:15:04
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
@@ -42,17 +42,25 @@ Please make sure the MATLAB directory in the [CMakeLists.txt](https://github.com
 There are several examples projects in the [examples](https://github.com/wangru25/HERMES/tree/main/examples).
 ### How to run
 ```bash
-./Snapshot InputData Filtration Num P
+./Snapshot InputData Filtration Num P Complex
 ```
 - InputData: The point cloud data is allowed
-- Filtration: The radius filtration parameters 
+- Filtration: The radius filtration parameters. Note: For alpha complex, the input filtration is radius^2.; for Vietoris–Rips complex, the input filtration is 2*radius
 - Num: The number of eigenvalues that will be calculated
 - P: The persistent value
+- Complex: Two choices, 1) Alpha complex 2) Vietoris–Rips complex
 ### For example:
+#### Alpha complex
 ```bash
 cd examples
-./../build/Snapshot Test_C60.xyz filtration.txt 100 0.4
+./../build/Snapshot Test_C60.xyz filtration.txt 100 0.4 
 ```
+#### Vietoris–Rips complex
+```bash
+cd examples
+./../build/Snapshot Test_C60.xyz filtration.txt 100 0.4 r
+```
+
 - The spectra of the 0th-order 0.4-persistent Laplacian will be saved in [examples/snapshots_vertex.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_vertex.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
 - The spectra of the 1th-order 0.4-persistent will be saved in [examples/snapshots_edge.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_edge.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
 - The spectra of the 2th-order 0.4-persistent will be saved in [examples/snapshots_facet.txt](https://github.com/wangru25/HERMES/blob/main/examples/snapshots_facet.txt). Each line presents harmonic or non-harmonic eigenvalues at a specific filtration value.
