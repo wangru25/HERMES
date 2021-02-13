@@ -4,14 +4,14 @@
  * @Author: Rui Wang
  * @Date: 2020-12-10 11:06:29
  * @LastModifiedBy: Rui Wang
- * @LastEditTime: 2021-02-13 15:31:32
+ * @LastEditTime: 2021-02-13 15:47:16
  * @Email: wangru25@msu.edu
  * @FilePath: /HERMES/README.md
  * @Description: 
 -->
 # HERMES
 
-HERMES is a software package for simultaneous topological data analysis (persistent Betti numbers) and geometric data analysis (persistent eigenvalues). It is realized through persistent spectral graph theory. In the present release, we consider an implementation in alpha complexes.
+HERMES is a software package for simultaneous topological data analysis (persistent Betti numbers) and geometric data analysis (persistent eigenvalues). It is realized through persistent spectral graph theory. In the present release, we consider an implementation in alpha complex and Vietoris–Rips complex.
 
 ## Requirements
 - cmake 3.1 or higher
@@ -45,7 +45,7 @@ There are several examples projects in the [examples](https://github.com/wangru2
 ./Snapshot InputData Filtration Num P Complex
 ```
 - InputData: The point cloud data is allowed
-- Filtration: The radius filtration parameters. Note: For alpha complex, the input filtration Filtration_alpha is actually radius^2. For Vietoris–Rips complex, the input filtration Filtration_rips is 2*radius, which match with the other open-source packages such as Ripser, Gudhi, and Diode.
+- Filtration: The filtration parameters. Note: For alpha complex, the input filtration Filtration_alpha is actually radius^2. For Vietoris–Rips complex, the input filtration Filtration_rips is 2*radius, which match with the other open-source packages such as Ripser, Gudhi, and Diode.
 - Num: The number of eigenvalues that will be calculated
 - P: The persistent value, which describes the increasement of radius. 
 - Complex: Two choices, 1) Alpha complex 2) Vietoris–Rips complex
