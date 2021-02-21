@@ -31,6 +31,8 @@ file(GLOB Sources
     src/utility.hpp
     src/alpha_shape.hpp
     src/alpha_shape.cpp
+    src/rips_shape.hpp
+    src/rips_shape.cpp
     src/snapshot.hpp
     src/snapshot.cpp)
 
@@ -42,5 +44,4 @@ target_link_libraries( Snapshot
 	${LIB_MATLAB_DATA_ARRAY}
 	${LIB_MATLAB_ENGINE}
 	Threads::Threads 	
-)
-
+)	

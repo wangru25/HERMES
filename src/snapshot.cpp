@@ -458,7 +458,7 @@ void Snapshot::buildPersistentLaplacian0(SparseMatrix& L0, const SparseMatrix& E
         if (m_complex == 'a'){
             p = pow(sqrt(filtration) + p, 2.) - filtration;
         } else{
-        p = p+p;
+            p = p+p;
         }
 
 		const int vertex_size = numVertices;
