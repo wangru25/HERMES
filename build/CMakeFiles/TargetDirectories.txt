@@ -1,3 +1,0 @@
-/home/rui/Dropbox/Linux_Backup/MSU/0_Packages/HERMES/build/CMakeFiles/rebuild_cache.dir
-/home/rui/Dropbox/Linux_Backup/MSU/0_Packages/HERMES/build/CMakeFiles/Snapshot.dir
-/home/rui/Dropbox/Linux_Backup/MSU/0_Packages/HERMES/build/CMakeFiles/edit_cache.dir
