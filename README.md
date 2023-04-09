@@ -88,5 +88,5 @@ You may use the following bibtex entry to cite HERMES:
 
 ## Contributors
 
-HERMES was created by [Rundong Zhao](https://github.com/rdzhao) and is maintained by [Yiying Tong](xxx), [Emily Ribando-Gros](https://github.com/eribandogros), [Jiahui Chen](https://github.com/Jiahuic), [Rui Wang](https://github.com/wangru25), and [Weilab at MSU Math](https://github.com/msuweilab).
+HERMES was developed by [Rundong Zhao](https://github.com/rdzhao) and is maintained by [Yiying Tong](xxx), [Emily Ribando-Gros](https://github.com/eribandogros), [Jiahui Chen](https://github.com/Jiahuic), [Rui Wang](https://github.com/wangru25), and [Weilab at MSU Math]([https://github.com/msuweilab](https://github.com/WeilabMSU)).
 
