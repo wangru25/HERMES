@@ -86,7 +86,7 @@ You may use the following bibtex entry to cite HERMES:
 ```
 
 ## References
-- R. Wang, R. Zhao, E. Ribando-Gros, J. Chen, Y. Tong, and G.-W. Wei. [HERMES: Persistent spectral graph software]([https://arxiv.org/pdf/2012.11065.pdf](https://www.aimsciences.org/article/doi/10.3934/fods.2021006)), _Foundations of Data Science_, 2021.
+- R. Wang, R. Zhao, E. Ribando-Gros, J. Chen, Y. Tong, and G.-W. Wei. [HERMES: Persistent spectral graph software](https://arxiv.org/pdf/2012.11065.pdf](https://www.aimsciences.org/article/doi/10.3934/fods.2021006), _Foundations of Data Science_, 2021.
 - R. Wang, D. D. Nguyen, and G.-W. Wei. [Persistent spectral graph](https://users.math.msu.edu/users/weig/paper/p243.pdf), _International Journal for Numerical Methods in Biomedical Engineering_, page e3376, 2020.
 
 
