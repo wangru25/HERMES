@@ -11,7 +11,7 @@
 -->
 # HERMES
 
-HERMES is a software package for simultaneous topological data analysis (persistent Betti numbers) and geometric data analysis (persistent eigenvalues). It is realized through persistent spectral graph theory. In the present release, we consider an implementation in alpha complex and Vietoris–Rips complex.
+HERMES is a software package for simultaneous topological data analysis (persistent Betti numbers) and geometric data analysis (persistent eigenvalues). It is realized through persistent spectral graph theory. In the present release, we consider an implementation in the alpha complex and Vietoris–Rips complex.
 
 ## Requirements
 - cmake 3.1 or higher
@@ -39,7 +39,7 @@ Please make sure the MATLAB directory in the [CMakeLists.txt](https://github.com
 
 
 ## Examples
-There are several examples projects in the [examples](https://github.com/wangru25/HERMES/tree/main/examples).
+There are several examples of projects in the [examples](https://github.com/wangru25/HERMES/tree/main/examples).
 ### How to run
 ```bash
 ./Snapshot InputData Filtration Num P Complex
@@ -47,15 +47,15 @@ There are several examples projects in the [examples](https://github.com/wangru2
 - InputData: The point cloud data is allowed
 - Filtration: The filtration parameters. Note: For alpha complex, the input filtration Filtration_alpha is actually radius^2. For Vietoris–Rips complex, the input filtration Filtration_rips is 2*radius, which match with the other open-source packages such as Ripser, Gudhi, and Diode.
 - Num: The number of eigenvalues that will be calculated
-- P: The persistent value, which describes the increasement of radius. 
-- Complex: Two choices, 1) Alpha complex 2) Vietoris–Rips complex
+- P: The persistent value, which describes the increase of radius. 
+- Complex: Two choices: 1) Alpha complex 2) Vietoris–Rips complex
 ### For example:
-#### Alpha complex
+#### Alpha Complex
 ```bash
 cd examples
 ./../build/Snapshot Test_C60.xyz filtration.txt 100 0.4 
 ```
-#### Vietoris–Rips complex
+#### Vietoris–Rips Complex
 ```bash
 cd examples
 ./../build/Snapshot Test_C60.xyz filtration.txt 100 0.4 r
@@ -73,20 +73,24 @@ Documentation for HERMES can be found [here](https://weilab.math.msu.edu/HERMES/
 ## Citing
 You may use the following bibtex entry to cite HERMES:
 ```
-@article{wang2020hermes,
+@article{wang2021hermes,
   title={HERMES: Persistent spectral graph software},
   author={Wang, Rui and Zhao, Rundong and Ribando-Gros, Emily and Chen, Jiahui and Tong, Yiying and Wei, Guo-Wei},
-  journal={arXiv preprint arXiv:2012.11065},
-  year={2020}
+  journal={Foundations of data science (Springfield, Mo.)},
+  volume={3},
+  number={1},
+  pages={67},
+  year={2021},
+  publisher={NIH Public Access}
 }
 ```
 
 ## References
-- R. Wang, R. Zhao, E. Ribando-Gros, J. Chen, Y. Tong, and G.-W. Wei. [Hermes: Persistent spectral graph software](https://arxiv.org/pdf/2012.11065.pdf), 2020.
-- R. Wang, D. D. Nguyen, and G.-W. Wei. [Persistent spectral graph](https://users.math.msu.edu/users/weig/paper/p243.pdf). International Journal for Numerical Methods in Biomedical Engineering, page e3376, 2020.
+- R. Wang, R. Zhao, E. Ribando-Gros, J. Chen, Y. Tong, and G.-W. Wei. [HERMES: Persistent spectral graph software]([https://arxiv.org/pdf/2012.11065.pdf](https://www.aimsciences.org/article/doi/10.3934/fods.2021006)), _Foundations of Data Science_, 2021.
+- R. Wang, D. D. Nguyen, and G.-W. Wei. [Persistent spectral graph](https://users.math.msu.edu/users/weig/paper/p243.pdf), _International Journal for Numerical Methods in Biomedical Engineering_, page e3376, 2020.
 
 
 ## Contributors
 
-HERMES was developed by [Rundong Zhao](https://github.com/rdzhao) and is maintained by [Yiying Tong](xxx), [Emily Ribando-Gros](https://github.com/eribandogros), [Jiahui Chen](https://github.com/Jiahuic), [Rui Wang](https://github.com/wangru25), and [Weilab at MSU Math](https://github.com/WeilabMSU).
+HERMES was developed by [Rundong Zhao](https://github.com/rdzhao) and is maintained by [Yiying Tong](https://www.cse.msu.edu/~ytong/), [Emily Ribando-Gros](https://github.com/eribandogros), [Jiahui Chen](https://github.com/Jiahuic), [Rui Wang](https://github.com/wangru25), and [Weilab at MSU Math](https://github.com/WeilabMSU).
 
